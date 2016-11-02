@@ -2,11 +2,11 @@ import requests
 import json
 import MySQLdb
 
-loadQ = ['EUR', 'USD', 'AUD', 'BTC', 'CAD', 'GBP', 'INR', 'JPY', 'MXN', 'RUB', 'CNY']
+loadQ = ['EUR', 'USD', 'AUD', 'CHF', 'CAD', 'GBP', 'INR', 'JPY', 'MXN', 'RUB', 'CNY']
 outerQ = loadQ[:]
 innerQ = loadQ[:]
 
-myDB = MySQLdb.connect(host="10.200.45.9",port=3306,user="dmz",passwd="letMe1n",db="user_info")
+myDB = MySQLdb.connect(host="10.200.45.127",port=3306,user="dmz",passwd="letMe1n",db="user_info")
 curs = myDB.cursor()
 curs.execute("truncate exchange;")
 
