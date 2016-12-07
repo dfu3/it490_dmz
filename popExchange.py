@@ -6,10 +6,11 @@ loadQ = ['EUR', 'USD', 'AUD', 'CHF', 'CAD', 'GBP', 'INR', 'JPY', 'MXN', 'RUB', '
 outerQ = loadQ[:]
 innerQ = loadQ[:]
 
-myDB = MySQLdb.connect(host="10.200.173.26",port=3306,user="dmz",passwd="letMe1n",db="user_info")
+myDB = MySQLdb.connect(host="10.200.173.10",port=3306,user="dmz",passwd="letMe1n",db="user_info")
 curs = myDB.cursor()
-qOut = str(curs.execute("select grouping from exchange order by id desc limit 1;"))
-currGroup = qOut[qOut.find("'")+1:1]
+curs.execute("select grouping from exchange order by id desc limit 1;")
+currGroup = curs.fetchone()[0]
+#currGroup = qOut[qOut.find("'")+1:1]
 currGroup = str(int(currGroup) + 1)
 curs.execute("truncate exchange;")
 curs.execute("truncate currencies;")
