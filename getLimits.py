@@ -10,7 +10,7 @@ def split_list(alist, parts=1):
 
 def getLimits(hist):#gets upper nd lower bounds for when to trade security
 
-    rateArr = split_list(hist, parts=3)
+    rateArr = split_list(hist, parts=4)
     upperList = list()
     lowerList = list()
     

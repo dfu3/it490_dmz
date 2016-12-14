@@ -9,21 +9,11 @@ loadQ = ['EUR', 'USD', 'AUD', 'CHF', 'CAD', 'GBP', 'INR', 'JPY', 'MXN', 'RUB', '
 outerQ = loadQ[:]
 innerQ = loadQ[:]
 
-DBIP = "10.200.173.68" #PAUL'S IP ADD
-DBIP = "10.200.173.193" #TIM'S IP ADD
-
-'''
-ret = os.system("ping -c 1 " + DBIP)
-if ret != 0:
-    DBIP = "10.200.173.193" #TIM'S IP ADD    
-print(ret)
-'''
-
 try:
-    myDB = MySQLdb.connect(host="10.200.173.68",port=3306,user="dmz",passwd="letMe1n",db="user_info")
+    myDB = MySQLdb.connect(host="10.200.45.16",port=3306,user="dmz",passwd="letMe1n",db="user_info")
 
 except(Exception):
-    myDB = MySQLdb.connect(host="10.200.173.193",port=3306,user="dmz",passwd="letMe1n",db="user_info")
+    myDB = MySQLdb.connect(host="10.200.20.230",port=3306,user="dmz",passwd="letMe1n",db="user_info")
 
 curs = myDB.cursor()
 curs.execute("select grouping from exchange order by id desc limit 1;")
@@ -51,7 +41,7 @@ for outerCurr in outerQ:
             curs.execute("insert into exchange(currency_1, currency_2, rate, grouping)  values('" + outerCurr + "', '" + innerCurr + "', '" + str(allRates[innerCurr]) + "', '" + str(currGroup) + "');")
             curs.execute("insert into exchange_backup(currency_1, currency_2, rate, grouping)  values('" + outerCurr + "', '" + innerCurr + "', '" + str(allRates[innerCurr]) + "', '" + str(currGroup) + "');")
 
-            curs.execute( "select rate from exchange_backup where (currency_1='" + outerCurr + "' and currency_2='" + innerCurr + "') or (currency_1='" + innerCurr + "' and currency_2='" + outerCurr + "') order by grouping desc limit 30;" )
+            curs.execute( "select rate from exchange_backup where (currency_1='" + outerCurr + "' and currency_2='" + innerCurr + "') or (currency_1='" + innerCurr + "' and currency_2='" + outerCurr + "') order by grouping desc limit 32;" )
 
             result = [item[0] for item in curs.fetchall()]
             lims = getLimits(result)
